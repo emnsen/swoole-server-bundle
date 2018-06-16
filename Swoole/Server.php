@@ -181,4 +181,21 @@ class Server
 
         return $reload;
     }
+
+    /**
+     * @return bool
+     * @throws SwooleException
+     */
+    public function isRunning()
+    {
+        $pid = $this->getPid();
+
+        if (!$pid) {
+            return false;
+        }
+
+        Process::kill($pid, 0);
+
+        return !swoole_errno();
+    }
 }

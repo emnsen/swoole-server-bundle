@@ -27,13 +27,16 @@ class AppServerReloadCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
 
         try {
+            $server = $this->getContainer()->get('app.swoole.server');
 
-            $this->getContainer()
-                ->get('app.swoole.server')
-                ->reload()
-            ;
+            if ($server->isRunning()) {
+                $server->reload();
 
-            $io->success('Swoole server reloaded!');
+                $io->success('Swoole server reloaded!');
+            } else {
+                $io->warning('Server not running! Please before start the server.');
+            }
+
         } catch (\Exception $exception) {
             $io->warning($exception->getMessage());
         }

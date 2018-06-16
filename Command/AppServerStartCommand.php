@@ -28,10 +28,14 @@ class AppServerStartCommand extends ContainerAwareCommand
 
         $server = $this->getContainer()->get('app.swoole.server');
 
-        $cb = function($m) use ($io) {
-            $io->success($m);
-        };
+        if ($server->isRunning()) {
+            $io->warning('Server is running! Please before stop the server.');
+        } else {
+            $cb = function($m) use ($io) {
+                $io->success($m);
+            };
 
-        $server->start($cb);
+            $server->start($cb);
+        }
     }
 }

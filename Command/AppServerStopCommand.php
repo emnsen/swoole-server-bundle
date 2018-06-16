@@ -27,12 +27,16 @@ class AppServerStopCommand extends ContainerAwareCommand
 
         try {
 
-            $this->getContainer()
-                ->get('app.swoole.server')
-                ->stop()
-            ;
+            $server = $this->getContainer()->get('app.swoole.server');
 
-            $io->success('Swoole server stopped!');
+            if ($server->isRunning()) {
+                $server->stop();
+
+                $io->success('Swoole server stopped!');;
+            } else {
+                $io->warning('Server not running! Please before start the server.');
+            }
+
         } catch (\Exception $exception) {
             $io->warning($exception->getMessage());
         }
