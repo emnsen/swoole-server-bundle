@@ -1,8 +1,8 @@
 <?php
 
-namespace DPX\SwoolerServerBundle\Swoole;
+namespace DPX\SwooleServerBundle\Swoole;
 
-use DPX\SwoolerServerBundle\Exception\SwooleException;
+use DPX\SwooleServerBundle\Exception\SwooleException;
 use Swoole\Process;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Class Server
  *
- * @package \DPX\SwoolerServerBundle\Swoole
+ * @package \DPX\SwooleServerBundle\Swoole
  */
 class Server
 {

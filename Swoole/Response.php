@@ -1,6 +1,6 @@
 <?php
 
-namespace DPX\SwoolerServerBundle\Swoole;
+namespace DPX\SwooleServerBundle\Swoole;
 
 class Response
 {

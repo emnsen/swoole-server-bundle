@@ -1,6 +1,6 @@
 <?php
 
-namespace DPX\SwoolerServerBundle\DependencyInjection;
+namespace DPX\SwooleServerBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

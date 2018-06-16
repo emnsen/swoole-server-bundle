@@ -1,6 +1,6 @@
 <?php
 
-namespace DPX\SwoolerServerBundle\Command;
+namespace DPX\SwooleServerBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;

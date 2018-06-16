@@ -1,6 +1,6 @@
 <?php
 
-namespace DPX\SwoolerServerBundle\Exception;
+namespace DPX\SwooleServerBundle\Exception;
 
 class SwooleException extends \Exception
 {
