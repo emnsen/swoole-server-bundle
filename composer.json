@@ -1,0 +1,22 @@
+{
+    "name": "emnsen/swoole-server-bundle",
+    "description": "Symfony Swoole HTTP Server Bundle",
+    "type": "symfony-bundle",
+    "authors": [
+      {
+        "name": "Emin Şen",
+        "email": "contact@emnsen.com"
+      }
+    ],
+    "require": {
+      "php": ">=7.0.0",
+      "ext-swoole": ">=2.1",
+      "symfony/framework-bundle": "^4"
+    },
+    "licence": "MIT",
+    "autoload": {
+      "psr-4": {
+        "DPX\\SwooleServerBundle\\": ""
+      }
+    }
+}
