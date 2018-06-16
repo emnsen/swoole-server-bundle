@@ -1,0 +1,20 @@
+services:
+    app.swoole.server:
+        class: DPX\SwooleServerBundle\Swoole\Server
+        public: true
+        arguments: ["", "", "", "@kernel"]
+
+    swoole_server.command.start:
+        class: DPX\SwooleServerBundle\Command\AppServerStartCommand
+        tags:
+            - { name: console.command }
+
+    swoole_server.command.stop:
+        class: DPX\SwooleServerBundle\Command\AppServerStopCommand
+        tags:
+            - { name: console.command }
+
+    swoole_server.command.reload:
+        class: DPX\SwooleServerBundle\Command\AppServerReloadCommand
+        tags:
+            - { name: console.command }

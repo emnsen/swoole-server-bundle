@@ -7,11 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * Class AppServerCommand
- *
- * @package \App\Command
- */
 class AppServerStopCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -38,7 +33,7 @@ class AppServerStopCommand extends ContainerAwareCommand
             }
 
         } catch (\Exception $exception) {
-            $io->warning($exception->getMessage());
+            $io->error($exception->getMessage());
         }
     }
 }

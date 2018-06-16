@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DPX\SwooleServerBundle\Swoole;
 
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
@@ -11,7 +13,7 @@ class Request
      * @return SymfonyRequest
      * @url https://github.com/phpearth/swoole-engine/blob/master/src/Driver/Symfony/Request.php
      */
-    public static function toSymfony(\Swoole\Http\Request $request)
+    public static function toSymfony(\Swoole\Http\Request $request): SymfonyRequest
     {
         $headers = [];
 

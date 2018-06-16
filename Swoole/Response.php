@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DPX\SwooleServerBundle\Swoole;
 
 class Response
@@ -11,7 +13,7 @@ class Response
     public static function toSwoole(
         \Swoole\Http\Response $response,
         \Symfony\Component\HttpFoundation\Response $symfonyResponse
-    ) {
+    ): void {
         // headers have already been sent by the developer
         if (headers_sent()) {
             return;

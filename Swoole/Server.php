@@ -1,17 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DPX\SwooleServerBundle\Swoole;
 
 use DPX\SwooleServerBundle\Exception\SwooleException;
 use Swoole\Process;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * Class Server
- *
- * @package \DPX\SwooleServerBundle\Swoole
- */
 class Server
 {
     /**
@@ -34,6 +30,18 @@ class Server
      */
     private $server;
 
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
+    /**
+     * Server constructor.
+     * @param string $host
+     * @param int $port
+     * @param array $options
+     * @param KernelInterface $kernel
+     */
     public function __construct(string $host, int $port, array $options, KernelInterface $kernel)
     {
         $this->host = $host;
@@ -63,7 +71,7 @@ class Server
      * @return int
      * @throws SwooleException
      */
-    public function getPid()
+    public function getPid(): int
     {
         $file = $this->getPidFile();
 
@@ -87,7 +95,7 @@ class Server
      *
      * @return string
      */
-    public function getPidFile()
+    public function getPidFile(): string
     {
         return $this->getOption('pid_file');
     }
@@ -95,7 +103,7 @@ class Server
     /**
      * Remove the pid file.
      */
-    private function removePidFile()
+    private function removePidFile(): void
     {
         $file = $this->getPidFile();
 
@@ -106,8 +114,9 @@ class Server
 
     /**
      * Start and configure swoole server.
+     * @param callable $cb
      */
-    public function start(callable $cb)
+    public function start(callable $cb): void
     {
         $this->createServer();
         $this->configureSwooleServer();
@@ -117,7 +126,7 @@ class Server
     /**
      * Create the swoole http server.
      */
-    private function createServer()
+    private function createServer(): void
     {
         $this->server = new \Swoole\Http\Server($this->host, $this->port);
     }
@@ -125,7 +134,7 @@ class Server
     /**
      * Configure the created server.
      */
-    private function configureSwooleServer()
+    private function configureSwooleServer(): void
     {
         $this->server->set($this->options);
     }
@@ -133,7 +142,7 @@ class Server
     /**
      * @param callable $cb
      */
-    private function symfonyBridge(callable $cb)
+    private function symfonyBridge(callable $cb): void
     {
         $this->server->on('start', function () use ($cb) {
             $cb('Server started!');
@@ -153,9 +162,10 @@ class Server
     /**
      * Stop the swoole server.
      *
-     * @throws \Exception
+     * @return bool
+     * @throws SwooleException
      */
-    public function stop()
+    public function stop(): bool
     {
         $kill = Process::kill($this->getPid());
 
@@ -169,9 +179,10 @@ class Server
     /**
      * Reload swoole server.
      *
-     * @throws \Exception
+     * @return bool
+     * @throws SwooleException
      */
-    public function reload()
+    public function reload(): bool
     {
         $reload = Process::kill($this->getPid(), SIGUSR1);
 
@@ -186,7 +197,7 @@ class Server
      * @return bool
      * @throws SwooleException
      */
-    public function isRunning()
+    public function isRunning(): bool
     {
         $pid = $this->getPid();
 

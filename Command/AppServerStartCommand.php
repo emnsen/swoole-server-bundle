@@ -7,11 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * Class AppServerCommand
- *
- * @package \App\Command
- */
 class AppServerStartCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -26,16 +21,18 @@ class AppServerStartCommand extends ContainerAwareCommand
     {
         $io = new SymfonyStyle($input, $output);
 
-        $server = $this->getContainer()->get('app.swoole.server');
+        try {
+            $server = $this->getContainer()->get('app.swoole.server');
 
-        if ($server->isRunning()) {
-            $io->warning('Server is running! Please before stop the server.');
-        } else {
-            $cb = function($m) use ($io) {
-                $io->success($m);
-            };
-
-            $server->start($cb);
+            if ($server->isRunning()) {
+                $io->warning('Server is running! Please before stop the server.');
+            } else {
+                $server->start(function (string $message) use ($io) {
+                    $io->success($message);
+                });
+            }
+        } catch (\Exception $exception) {
+            $io->error($exception->getMessage());
         }
     }
 }
