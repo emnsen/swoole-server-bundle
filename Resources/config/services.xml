@@ -11,6 +11,15 @@
             <argument/>
             <argument type="service" id="kernel"/>
         </service>
+        <service id="swoole_server.command.start" class="DPX\SwooleServerBundle\Command\AppServerStartCommand">
+            <tag name="console.command"/>
+        </service>
+        <service id="swoole_server.command.stop" class="DPX\SwooleServerBundle\Command\AppServerStopCommand">
+            <tag name="console.command"/>
+        </service>
+        <service id="swoole_server.command.reload" class="DPX\SwooleServerBundle\Command\AppServerReloadCommand">
+            <tag name="console.command"/>
+        </service>
     </services>
 
 </container>
