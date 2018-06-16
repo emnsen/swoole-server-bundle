@@ -9,6 +9,11 @@ services:
         tags:
             - { name: console.command }
 
+    swoole_server.command.status:
+        class: DPX\SwooleServerBundle\Command\AppServerStatusCommand
+        tags:
+            - { name: console.command }
+
     swoole_server.command.stop:
         class: DPX\SwooleServerBundle\Command\AppServerStopCommand
         tags:

@@ -51,12 +51,28 @@ class Server
     }
 
     /**
+     * @return string
+     */
+    public function getHost(): string
+    {
+        return $this->host;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPort(): int
+    {
+        return $this->port;
+    }
+
+    /**
      * Get swoole configuration option value.
      *
      * @param string $key
      * @return mixed
      */
-    private function getOption(string $key)
+    public function getOption(string $key)
     {
         $option = $this->options[$key];
 
@@ -69,14 +85,13 @@ class Server
 
     /**
      * @return int
-     * @throws SwooleException
      */
-    public function getPid(): int
+    private function getPid(): int
     {
         $file = $this->getPidFile();
 
         if (!file_exists($file)) {
-            throw new SwooleException("The pid file not found.");
+            return 0;
         }
 
         $pid = (int) file_get_contents($file);
@@ -95,7 +110,7 @@ class Server
      *
      * @return string
      */
-    public function getPidFile(): string
+    private function getPidFile(): string
     {
         return $this->getOption('pid_file');
     }
@@ -195,7 +210,6 @@ class Server
 
     /**
      * @return bool
-     * @throws SwooleException
      */
     public function isRunning(): bool
     {
