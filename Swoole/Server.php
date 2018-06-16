@@ -59,11 +59,33 @@ class Server
     }
 
     /**
+     * @param string $host
+     * @return $this
+     */
+    public function setHost(string $host): self
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getPort(): int
     {
         return $this->port;
+    }
+
+    /**
+     * @param int $port
+     * @return $this
+     */
+    public function setPort(int $port): self
+    {
+        $this->port = $port;
+
+        return $this;
     }
 
     /**
