@@ -43,11 +43,6 @@ class Request
             $content
         );
 
-        if (0 === strpos($symfonyRequest->headers->get('Content-Type'), 'application/json')) {
-            $data = json_decode($request->rawContent(), true);
-            $symfonyRequest->request->replace(is_array($data) ? $data : []);
-        }
-
         if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
             $symfonyRequest::setTrustedProxies(explode(',', $trustedProxies), SymfonyRequest::HEADER_X_FORWARDED_ALL ^ SymfonyRequest::HEADER_X_FORWARDED_HOST);
         }
